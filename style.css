@@ -1,0 +1,24 @@
+
+    /* Custom style for the underline */
+    .underline-style {
+      position: relative;
+    }
+
+    .underline-style input {
+      border: none;
+      border-bottom: 1px solid #007bff; /* Change the color to your preferred underline color */
+      border-radius: 0;
+      outline: none;
+      box-shadow: none;
+      width: 15%; /* Ensure the input takes the full width */
+    }
+
+    
+    }
+
+    .underline-style input:focus + label,
+    .underline-style input:valid + label {
+      bottom: 8px;
+      font-size: 8px;
+      color: #007bff; /* Change the color to your preferred label color when focused */
+    }
