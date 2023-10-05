@@ -20,3 +20,14 @@ button {
     margin: 0.5%;
     font-size: 18px;
 }
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25%, 75% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+  }
+
+  /* Apply the animation to the form control on focus */
+  .form-control:focus {
+    animation: shake 0.5s ease-in-out;
+  }
