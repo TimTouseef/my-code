@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>CRUD App</title>
+</head>
+<body>
+    <div class="container">
+        <h2>CRUD App</h2>
+        <form id="userForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="button" onclick="saveUser()">Save</button>
+        </form>
+        <div id="userList"></div>
+    </div>
+    <script>
+     const express = require('express');
+const mysql = require('mysql');
+const bodyParser = require('body-parser');
+
+const app = express();
+const port = 3000;
+
+// MySQL Connection
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'your_mysql_username',
+    password: 'your_mysql_password',
+    database: 'crud_example'
+});
+
+db.connect(err => {
+    if (err) {
+        console.error('MySQL connection error:', err);
+        return;
+    }
+    console.log('Connected to MySQL database');
+});
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Routes
+app.post('/saveUser', (req, res) => {
+    const { username, email } = req.body;
+
+    const sql = 'INSERT INTO users (username, email) VALUES (?, ?)';
+    db.query(sql, [username, email], (err, result) => {
+        if (err) {
+            console.error('Error saving user:', err);
+            res.json({ success: false });
+            return;
+        }
+
+        res.json({ success: true });
+    });
+});
+
+app.get('/getUsers', (req, res) => {
+    const sql = 'SELECT * FROM users';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error fetching users:', err);
+            res.json([]);
+            return;
+        }
+
+        res.json(results);
+    });
+});
+
+app.delete('/deleteUser/:id', (req, res) => {
+    const userId = req.params.id;
+
+    const sql = 'DELETE FROM users WHERE id = ?';
+    db.query(sql, [userId], (err, result) => {
+        if (err) {
+            console.error('Error deleting user:', err);
+            res.json({ success: false });
+            return;
+        }
+
+        res.json({ success: true });
+    });
+});
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+});</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    //adding file with jquery website//
+   // <script src="jquery.js"></script>//
+   
+   <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="test1"> alert function </h1>
+    <h2>CDN content Delivery Network </h2>
+    <p id="p1"> just going to jquery website and then CDN file after download cdn file copy file</p>
+    <script>
+
+        // document alert function of Jquery
+$(document).ready(function(){
+    alert(1);
+    console.log("hello");
+
+});
+
+
+$(doucument).ready(function(){
+var a= $('#test1').html();
+console.log(a);
+}
+});
+
+$(document).ready(function(){
+  $("#p1").hover(function(){
+    alert("You entered p1!");
+  },
+  function(){
+    alert("Bye! You now leave p1!");
+  }); 
+
+        </script>
+    
+</body>
+</html>
